@@ -5,3 +5,4 @@ venv
 logs
 .ipynb_checkpoints
 7 June 2024
+*.png
