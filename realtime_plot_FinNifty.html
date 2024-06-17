@@ -1,0 +1,46 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Real-time Plot - FinNifty</title>
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+            <div id="container_FinNifty" style="width:100%; height:400px;"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var chart = Highcharts.chart('container_FinNifty', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: 'Real-time Final PnL and Use Strike - FinNifty'
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            title: {
+                                text: 'Time'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Values'
+                            }
+                        },
+                        series: [{
+                            name: 'Final PnL',
+                            data: [[[-2208933001000, 0.3455767035080545]]]
+                        }, {
+                            name: 'Use Strike',
+                            data: [[[-2208933001000, -0.01438002964672396]]]
+                        }]
+                    });
+                });
+            </script>
+        </body>
+        </html>
+        

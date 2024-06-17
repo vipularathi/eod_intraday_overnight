@@ -1,0 +1,46 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Real-time Plot - MidCapNifty</title>
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+            <div id="container_MidCapNifty" style="width:100%; height:400px;"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var chart = Highcharts.chart('container_MidCapNifty', {
+                        chart: {
+                            type: 'line'
+                        },
+                        title: {
+                            text: 'Real-time Final PnL and Use Strike - MidCapNifty'
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            title: {
+                                text: 'Time'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Values'
+                            }
+                        },
+                        series: [{
+                            name: 'Final PnL',
+                            data: [[[-2208933001000, 0.47899797734767885]]]
+                        }, {
+                            name: 'Use Strike',
+                            data: [[[-2208933001000, 0.7234475809653071]]]
+                        }]
+                    });
+                });
+            </script>
+        </body>
+        </html>
+        

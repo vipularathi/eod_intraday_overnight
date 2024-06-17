@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-time Plot - Nifty, BankNifty, FinNifty, MidCapNifty</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 50% 50%;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            padding: 0;
+        }
+        .grid-item {
+            padding: 10px;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item" id="container_Nifty"></div>
+        <div class="grid-item" id="container_BankNifty"></div>
+        <div class="grid-item" id="container_FinNifty"></div>
+        <div class="grid-item" id="container_MidCapNifty"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var charts = {};
+            var data = [{"MidCapNifty": {"final_pnl": [[-2208955441000, -0.5964451797840957]], "use_strike": [[-2208955441000, -0.11346834007358694]]}}];
+
+            // Initialize charts for each index
+            ['Nifty', 'BankNifty', 'FinNifty', 'MidCapNifty'].forEach(function(index) {
+                charts[index] = Highcharts.chart('container_' + index, {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: index + ' - Real-time Final PnL and Use Strike'
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        title: {
+                            text: 'Time'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Values'
+                        }
+                    },
+                    series: [{
+                        name: 'Final PnL',
+                        data: []
+                    }, {
+                        name: 'Use Strike',
+                        data: []
+                    }]
+                });
+            });
+
+            // Function to update charts with new data
+            function updateCharts(data) {
+                Object.keys(data).forEach(function(index) {
+                    charts[index].series[0].addPoint(data[index]['final_pnl'], true, false);
+                    charts[index].series[1].addPoint(data[index]['use_strike'], true, false);
+                });
+            }
+
+            // Initialize with first data set
+            updateCharts(data[0]);
+
+            // Function to periodically update charts with new data
+            var index = 1; // Start with second data set
+            function addData() {
+                if (index < [{"MidCapNifty": {"final_pnl": [[-2208955441000, -0.5964451797840957]], "use_strike": [[-2208955441000, -0.11346834007358694]]}}].length) {
+                    updateCharts(data[index]);
+                    index++;
+                }
+            }
+
+            // Call addData every minute to simulate real-time updates
+            setInterval(addData, 5000); // Update every minute
+
+        });
+    </script>
+</body>
+</html>
