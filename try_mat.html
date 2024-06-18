@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Plot</title>
+</head>
+<body>
+    <h1>Dynamic Plot</h1>
+    <img id="plot" src="plot.png" alt="Plot">
+    <script>
+        function updatePlot() {
+            var img = document.getElementById('plot');
+            img.src = 'plot.png?' + new Date().getTime();
+        }
+
+        setInterval(updatePlot, 1000); // Update every second
+    </script>
+</body>
+</html>

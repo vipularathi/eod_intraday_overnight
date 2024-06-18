@@ -1,0 +1,63 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Dynamic Plot</title>
+            <script src="https://code.highcharts.com/highcharts.js"></script>
+            <script src="https://code.highcharts.com/modules/exporting.js"></script>
+            <script src="https://code.highcharts.com/modules/export-data.js"></script>
+            <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </head>
+        <body>
+            <div id="container" style="width:100%; height:400px;"></div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var chart = Highcharts.chart('container', {
+                        chart: {
+                            type: 'line',
+                            events: {
+                                load: function () {
+                                    var series1 = this.series[0];
+                                    var series2 = this.series[1];
+                                    var data = [[1718702399000, 0.0, 23547.8], [1718702459000, 0.39580000000000654, 23549.199999999997], [1718702519000, 2.485450000000004, 23552.649999999998], [1718702579000, -2.02375, 23539.05], [1718702639000, -5.147199999999994, 23530.199999999997], [1718702699000, -2.823, 23538.8]];
+                                    var index = 0;
+                                    function addPoint() {
+                                        if (index < data.length) {
+                                            var point = data[index];
+                                            series1.addPoint([point[0], point[1]], true, false);
+                                            series2.addPoint([point[0], point[2]], true, false);
+                                            index++;
+                                        }
+                                    }
+                                    setInterval(addPoint, 30000); // Update every 30 second
+                                }
+                            }
+                        },
+                        title: {
+                            text: 'Dynamic Final PnL and Use Strike'
+                        },
+                        xAxis: {
+                            type: 'datetime',
+                            title: {
+                                text: 'Time'
+                            }
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Values'
+                            }
+                        },
+                        series: [{
+                            name: 'Final PnL',
+                            data: []
+                        }, {
+                            name: 'Forward',
+                            data: []
+                        }]
+                    });
+                });
+            </script>
+        </body>
+        </html>
+        
